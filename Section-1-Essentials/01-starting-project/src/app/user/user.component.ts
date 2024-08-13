@@ -1,4 +1,12 @@
-import { Component, computed, Input, input, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  EventEmitter,
+  Input,
+  input,
+  Output,
+  signal,
+} from '@angular/core';
 
 @Component({
   selector: 'app-user',
@@ -7,24 +15,28 @@ import { Component, computed, Input, input, signal } from '@angular/core';
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',
 })
-// export class UserComponent {
-//   @Input({ required: true }) avatar!: string; // @Input() marks avatar as settable property from outside
-//   @Input({ required: true }) name!: string;
+export class UserComponent {
+  @Input({ required: true }) id!: string;
+  @Input({ required: true }) avatar!: string; // @Input() marks avatar as settable property from outside
+  @Input({ required: true }) name!: string;
 
-//   get imagePath() {
-//     return 'assets/users/' + this.avatar;
-//   }
-//   onSelectUser() {}
-// }
+  @Output() select = new EventEmitter();
+  get imagePath() {
+    return 'assets/users/' + this.avatar;
+  }
+  onSelectUser() {
+    this.select.emit(this.id);
+  }
+}
 
 // Signals Approach
-export class UserComponent {
-  avatar = input.required<string>();
-  name = input.required<string>();
+// export class UserComponent {
+//   avatar = input.required<string>();
+//   name = input.required<string>();
 
-  imagePath = computed(() => {
-    return 'assets/users/' + this.avatar();
-  });
+//   imagePath = computed(() => {
+//     return 'assets/users/' + this.avatar();
+//   });
 
-  onSelectUser() {}
-}
+//   onSelectUser() {}
+// }
