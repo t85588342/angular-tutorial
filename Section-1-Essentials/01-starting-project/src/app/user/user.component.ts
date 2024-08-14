@@ -21,7 +21,7 @@ export class UserComponent {
   @Input({ required: true }) avatar!: string; // @Input() marks avatar as settable property from outside
   @Input({ required: true }) name!: string;
 
-  @Output() select = new EventEmitter();
+  @Output() select = new EventEmitter<string>();
   // select = output<string>(); // internally uses EventEmitter
 
   get imagePath() {
